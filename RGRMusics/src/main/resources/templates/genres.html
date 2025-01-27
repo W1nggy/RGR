@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Genres</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Genres</h1>
+
+    
+    <div th:if="${isAdmin}">
+        <a href="/genres/add" class="button">Add Genre</a>
+    </div>
+
+    
+    <div th:if="${!isAdmin}" class="warning-message">
+        <p style="color: #b61d1d;">Note: Edit Access Restricted: Please Log In as Admin to Make Changes.</p>
+    </div>
+
+    
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Genre Name</th>
+            <th>Description</th>
+            <th th:if="${isAdmin}">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr th:each="genre : ${genres}">
+            <td th:text="${genre.genreId}"></td>
+            <td th:text="${genre.genreName}"></td>
+            <td th:text="${genre.description}"></td>
+            
+            <td th:if="${isAdmin}" class="actions">
+                <a th:href="@{/genres/edit/{id}(id=${genre.genreId})}" class="button edit">Edit</a>
+                <a th:href="@{/genres/delete/{id}(id=${genre.genreId})}" class="button delete">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    
+    <a href="/home" class="button back">Back to Home</a>
+</div>
+</body>
+</html>

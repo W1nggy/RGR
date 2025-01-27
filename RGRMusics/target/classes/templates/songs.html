@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Songs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Songs</h1>
+
+    
+    <div th:if="${isAdmin}">
+        <a href="/songs/add" class="button">Add Song</a>
+    </div>
+
+    
+    <div th:if="${!isAdmin}" class="warning-message">
+        <p style="color: #b61d1d;">Note: Edit Access Restricted: Please Log In as Admin to Make Changes..</p>
+    </div>
+
+    
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Song Name</th>
+            <th>Duration</th>
+            <th>Genre</th>
+            <th>Music Group</th>
+            <th th:if="${isAdmin}">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="song : ${songs}">
+            <td th:text="${song.id}"></td>
+            <td th:text="${song.songName}"></td>
+            <td th:text="${song.duration}"></td>
+            <td th:text="${song.genreSong}"></td>
+            <td th:text="${song.music_Group.groupName}"></td>
+            <td th:if="${isAdmin}" class="actions">
+                
+                <a th:href="@{/songs/edit/{id}(id=${song.id})}" class="button edit">Edit</a>
+                
+                <a th:href="@{/songs/delete/{id}(id=${song.id})}" class="button delete">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    
+    <a href="/home" class="button back">Back to Home</a>
+</div>
+</body>
+</html>
