@@ -15,29 +15,24 @@ public class MusicgroupService {
     @Autowired
     private MusicgroupRepository musicgroupRepository;
 
-    // Получить все музыкальные группы
     public List<Musicgroup> getAllMusicGroups() {
         return musicgroupRepository.findAll(Sort.by(Sort.Order.asc("id")));
     }
 
-    // Найти музыкальную группу по ID
     public Optional<Musicgroup> findMusicGroupById(int id) {
         return musicgroupRepository.findById(id);
     }
 
-    // Сохранить музыкальную группу
     public void saveMusicGroup(Musicgroup musicgroup) {
         musicgroupRepository.save(musicgroup);
     }
 
-    // Исключение для связанных жанров (при необходимости)
     public class MusicGroupHasGenreException extends RuntimeException {
         public MusicGroupHasGenreException(String message) {
             super(message);
         }
     }
 
-    // Обновить данные музыкальной группы
     public void updateMusicGroup(Musicgroup updatedMusicGroup) {
         Musicgroup existingMusicGroup = musicgroupRepository.findById(updatedMusicGroup.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Music group not found"));
@@ -48,7 +43,6 @@ public class MusicgroupService {
         musicgroupRepository.save(existingMusicGroup);
     }
 
-    // Удалить музыкальную группу по ID
     public void deleteMusicGroup(int id) {
         musicgroupRepository.deleteById(id);
     }
