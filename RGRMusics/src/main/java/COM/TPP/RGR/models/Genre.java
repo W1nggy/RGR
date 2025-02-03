@@ -15,7 +15,6 @@ public class Genre {
 
     private String description;
 
-    // Гетери та сетери
     public Integer getGenreId() {
         return genreId;
     }
