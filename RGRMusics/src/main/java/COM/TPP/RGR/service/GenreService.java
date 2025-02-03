@@ -14,22 +14,18 @@ public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
 
-    // Получить все жанры
     public List<Genre> getAllGenres() {
         return genreRepository.findAll(Sort.by(Sort.Order.asc("genreId")));
     }
 
-    // Найти жанр по ID
     public Optional<Genre> findGenreById(int id) {
         return genreRepository.findById(id);
     }
 
-    // Сохранить жанр
     public void saveGenre(Genre genre) {
         genreRepository.save(genre);
     }
 
-    // Обновить жанр
     public void updateGenre(Genre updatedGenre) {
         Genre existingGenre = genreRepository.findById(updatedGenre.getGenreId())
                 .orElseThrow(() -> new IllegalArgumentException("Genre not found"));
@@ -40,7 +36,6 @@ public class GenreService {
         genreRepository.save(existingGenre);
     }
 
-    // Удалить жанр
     public void deleteGenre(int id) {
         genreRepository.deleteById(id);
     }
